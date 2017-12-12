@@ -9,7 +9,7 @@
 <!--       <param name="encryptorRegisteredName">strongHibernateStringEncryptor</param> -->
 <!--     </typedef> -->
 
-    <class name="com.javawebtutor.User" table="USER">
+    <class name="com.ibanfr.hibernate.model.User" table="USER">
         <id name="userId" type="int" column="USER_ID">
             <generator class="increment"/>
         </id>

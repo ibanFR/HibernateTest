@@ -1,4 +1,4 @@
-package com.javawebtutor;
+package com.ibanfr.hibernate.model;
 
 import java.util.Date;
 
@@ -43,8 +43,15 @@ public class User {
         return userId;
     }
  
-    public void setUserId(int userId) {
+	public void setUserId(int userId) {
         this.userId = userId;
     }
+
+
+    @Override
+	public String toString() {
+		return "User [userId=" + userId + ", username=" + username + ", createdBy=" + createdBy + ", createdDate="
+				+ createdDate + "]";
+	}
 
 }

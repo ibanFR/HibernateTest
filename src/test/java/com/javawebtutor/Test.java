@@ -8,6 +8,10 @@ import org.jasypt.hibernate4.encryptor.HibernatePBEEncryptorRegistry;
 import org.jasypt.util.password.ConfigurablePasswordEncryptor;
 import org.jasypt.util.password.StrongPasswordEncryptor;
 
+import com.ibanfr.HibernateUtil;
+import com.ibanfr.HibernateUtilOnTheFly;
+import com.ibanfr.hibernate.model.User;
+
 public class Test {
 	public static void main(String[] args) {
 
