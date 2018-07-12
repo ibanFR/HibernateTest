@@ -42,7 +42,8 @@ private static Key generateKey() throws Exception {
 
 public static void main(String[] args) throws Exception {
 
-    String value = "assf1r3";
+    String value = "mysqlpassword";
+//    String value = "assf1r3";
     String valueEnc = AESEncryptionDecryptionTest.encrypt(value);
 //    String valueEnc = "VCh4WpXtMDmMxTaPzvxj9A==";
     String valueDec = AESEncryptionDecryptionTest.decrypt(valueEnc);
