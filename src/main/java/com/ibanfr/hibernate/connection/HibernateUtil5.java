@@ -12,9 +12,9 @@ public class HibernateUtil5 {
 	
 	private static Logger logger = LoggerFactory.getLogger(HibernateUtil5.class);
 	
-	final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
-			.configure() // configures settings from hibernate.cfg.xml
-			.build();
+//	final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
+//			.configure() // configures settings from hibernate.cfg.xml
+//			.build();
 	
 	private static  SessionFactory sessionFactory = buildSessionFactory();
 
