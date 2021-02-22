@@ -3,6 +3,7 @@ package com.ibanfr.hibernate.manager;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.util.Date;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -39,6 +40,19 @@ public class UserManagerTest {
 			assertNotNull(u);
 			assertEquals(1, u.getUserId());
 		
+	}
+
+	@Test
+	public void testSaveOrUpdateUser(){
+		UserManager manager = new UserManager();
+		User user = new User();
+		user.setUsername("TestSaveOrUpdate");
+		user.setCreatedDate(new Date());
+		manager.saveOrUpdateUser(user);
+
+		assertNotNull(user.getUserId());
+		System.out.println(user);
+
 	}
 
 }

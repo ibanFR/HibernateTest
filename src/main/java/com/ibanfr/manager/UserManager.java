@@ -10,18 +10,57 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
 import com.ibanfr.hibernate.connection.HibernateUtil;
 import com.ibanfr.hibernate.model.User;
 import com.ibanfr.hibernate.model.User_;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author IVAN
  *
  */
 public class UserManager {
-	
+
+	/**
+	 * SLF4J Logger.
+	 */
+	private static Logger logger;
+
+	static {
+		logger = LoggerFactory.getLogger(HibernateUtil.class);
+	}
+
+
+	/**
+	 * Save or update given {@link User} instance.
+	 *
+	 * @param user The <code>User</code> instance to save or update.
+	 * @return Saved or udpated <code>User</code> instance.
+	 */
+	public User saveOrUpdateUser(User user){
+
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		//TODO: Exception handling.
+		try {
+			session = HibernateUtil.getSessionFactory().getCurrentSession();
+			session.beginTransaction();
+			session.saveOrUpdate(user);
+			session.getTransaction().commit();
+		} catch (HibernateException e) {
+			logger.error("Error saving or updating User={}",user, e);
+			if (session.getTransaction().isActive()) {
+				session.getTransaction().rollback();
+			}
+			throw e;
+		}
+
+		return user;
+	}
+
 	public User createUser(String name, String createdBy){
 		
 		Session session = HibernateUtil.getSessionFactory().openSession();
