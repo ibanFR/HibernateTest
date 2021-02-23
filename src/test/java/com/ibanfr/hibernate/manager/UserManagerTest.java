@@ -1,17 +1,20 @@
 package com.ibanfr.hibernate.manager;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import com.ibanfr.hibernate.model.User;
+import com.ibanfr.manager.UserManager;
+import org.junit.jupiter.api.Test;
 
 import java.util.Date;
 import java.util.List;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import com.ibanfr.hibernate.model.User;
-import com.ibanfr.manager.UserManager;
-
-
+/**
+ * Test class for {@link UserManager}.
+ * <p>
+ * Use {@link #testInsertUsers()} to create sample user into db.
+ */
 public class UserManagerTest {
 	
 	@Test
@@ -35,7 +38,7 @@ public class UserManagerTest {
 	public void testFindUserById() {
 		
 			UserManager manager = new UserManager();
-			User u = manager.findUserbyId(1);
+			User u = manager.findUserById(1);
 			System.out.println(u.toString());
 			assertNotNull(u);
 			assertEquals(1, u.getUserId());
@@ -50,7 +53,7 @@ public class UserManagerTest {
 		user.setCreatedDate(new Date());
 		manager.saveOrUpdateUser(user);
 
-		assertNotNull(user.getUserId());
+		assertNotNull(user);
 		System.out.println(user);
 
 	}
