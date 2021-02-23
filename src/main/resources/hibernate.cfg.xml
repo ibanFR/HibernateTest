@@ -7,14 +7,15 @@
 	<session-factory>
 
 
-		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/ivan_test</property>
+		<property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/ivan_test?useSSL=false&amp;createDatabaseIfNotExist=true</property>
 		<property name="hibernate.connection.username">root</property>
 		<property name="hibernate.connection.password">mysqlpassword</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
 		<property name="show_sql">true</property>
 		<property name="format_sql">true</property>
 		<property name="hbm2ddl.auto">update </property>
+		<property name="current_session_context_class">thread</property>
 
 <!-- 		<property name="hibernate.c3p0.min_size">5</property> -->
 <!-- 		<property name="hibernate.c3p0.max_size">20</property> -->
