@@ -39,13 +39,16 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>5.4.23.Final</version>
+			<version>6.0.0.Alpha9</version>
+<!--			<version>5.4.23.Final</version>-->
 		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-c3p0 -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-c3p0</artifactId>
-			<version>5.4.23.Final</version>
+			<version>6.0.0.Alpha9</version>
+<!--			<version>5.4.23.Final</version>-->
 		</dependency>
 
 		<dependency>
@@ -68,7 +71,9 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-jpamodelgen</artifactId>
-			<version>5.3.1.Final</version>
+			<version>6.0.0.Alpha9</version>
+<!--			<version>5.3.1.Final</version>-->
+
 			<scope>provided</scope>
 		</dependency>
 		<!-- Junit 5 -->

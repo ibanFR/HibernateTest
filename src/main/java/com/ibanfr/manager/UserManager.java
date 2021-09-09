@@ -1,10 +1,15 @@
 package com.ibanfr.manager;
 
+import com.ibanfr.hibernate.dto.CountDetailsDTO;
+import com.ibanfr.hibernate.dto.UserDetailsDTO;
 import com.ibanfr.hibernate.connection.HibernateUtil;
+import com.ibanfr.hibernate.model.Address;
 import com.ibanfr.hibernate.model.User;
 import com.ibanfr.hibernate.model.User_;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
+import org.hibernate.transform.Transformers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,6 +35,73 @@ public class UserManager {
 		logger = LoggerFactory.getLogger(HibernateUtil.class);
 	}
 
+	public List<UserDetailsDTO> listUsersWithHQL(boolean useTupleTransformer) {
+
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+
+		session.beginTransaction();
+
+		Query hqlQuery = session.createQuery(
+				"select u.username as name,a.line1 as addressLine1, a.id as id" +
+						" from User u " +
+						"join Address a on a.id = u.address.id");
+
+
+		if(useTupleTransformer) {
+			hqlQuery.setTupleTransformer(Transformers.aliasToBean(UserDetailsDTO.class)); // This works
+		}
+		else {
+			hqlQuery.setResultListTransformer(Transformers.aliasToBean(UserDetailsDTO.class));  // This fails
+		}
+
+		List<UserDetailsDTO> userDetails = hqlQuery.list();
+
+		session.getTransaction().commit();
+
+		return userDetails;
+	}
+
+	/**
+	 * Test HQL where a value is aggregated
+	 * @return
+	 */
+	public List<CountDetailsDTO> listAggregatedUserWithHQL() {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+
+		List<CountDetailsDTO> countDetails = session.createQuery(
+				"select count(*) as count, createdBy as createdBy from User group by createdBy")
+				.setTupleTransformer(Transformers.aliasToBean(CountDetailsDTO.class))
+				.list();
+
+		session.getTransaction().commit();
+
+		return countDetails;
+	}
+
+
+	public List<UserDetailsDTO> listUsersWithNativeQuery() {
+
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+
+		session.beginTransaction();
+
+		Query nativeQuery = session.createNativeQuery(
+				"select u.username as name,a.line1 as addressLine1, a.id as id " +
+				"from user u " +
+				"join address a on a.id = u.address_id")
+				;
+
+
+		nativeQuery.setTupleTransformer(Transformers.aliasToBean(UserDetailsDTO.class));  // does not work
+
+		List<UserDetailsDTO> userDetails = nativeQuery.getResultList();
+
+		session.getTransaction().commit();
+
+		return userDetails;
+
+	}
 
 	/**
 	 * Save or update given {@link User} instance.
@@ -99,6 +171,11 @@ public class UserManager {
 			user.setUsername("testUser"+i);
 			user.setCreatedBy("etu");
 			user.setCreatedDate(new Date());
+
+			Address address = new Address();
+			address.setLine1((i+1)+" Main St");
+			user.setAddress(address);
+			session.save(address);
 
 			session.save(user);
 		}
