@@ -10,7 +10,7 @@
 		<property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
 		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/ivan_test?useSSL=false&amp;createDatabaseIfNotExist=true</property>
 		<property name="hibernate.connection.username">root</property>
-		<property name="hibernate.connection.password">mysqlpassword</property>
+		<property name="hibernate.connection.password">assf1r3mysql</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
 		<property name="show_sql">true</property>
 		<property name="format_sql">true</property>
@@ -41,6 +41,10 @@
 
 		<mapping class="com.ibanfr.hibernate.model.User" />
 		<mapping class="com.ibanfr.hibernate.model.Address" />
+
+		<mapping class="com.ibanfr.hibernate.model.Person"></mapping>
+		<mapping class="com.ibanfr.hibernate.model.Team"></mapping>
+		<mapping class="com.ibanfr.hibernate.model.Passport"></mapping>
 		 
 <!-- 		<mapping resource="user.hbm.xml" /> -->
 	</session-factory>
